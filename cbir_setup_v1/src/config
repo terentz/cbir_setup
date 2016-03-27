@@ -1,0 +1,8 @@
+execute_mode = 2
+image_list_file     = imageList.txt
+create_table_file   = createImageTable.txt
+insert_values_file  = insertDataExternal.txt
+MySQL_host  = latcs7
+MySQL_user  = terentz
+MySQL_pwd   = 6@phomet
+

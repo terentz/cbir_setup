@@ -1,0 +1,42 @@
+                ***********************************
+                ***********************************
+                ****** Tristan's CBIR System ******
+                ******  Instruction  Manual  ******
+                ***********************************
+                ***********************************
+
+
+1. Open the file "config".
+
+    a) Assign either "1" or "2" to the variable "execute_mode"
+       (preferrably "2").
+
+    b) Assign to the variable "image_list_file" the name of the file
+       in which to store the list of names of bitmap files.
+
+    c) Assign to the variable "create_table_file" the name of the file
+       in which to store the "CREATE TABLE" command, ie the SQL/DDL.
+
+    d) Assign to the variable "insert_values_file" the name of the file
+       in which to store the "INSERT INTO" command, ie the SQL/DML.
+
+    e) Assign to the variable "MySQL_host" the name of your MySQL
+       server's hostname.
+
+    f) Assign to the variable "MySQL_user" your MySQL username.
+
+    g) Assign to the variable "MySQL_pwd" your MySQL password.
+
+
+2. Save and close the file "config".
+
+
+3. Run the following commands at the command line:
+
+    javac Setup.java
+    java Setup
+    run.sh
+
+
+4. You're done!
+
