@@ -26,6 +26,7 @@
  *
  */
 
+
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -37,11 +38,27 @@ import java.lang.NumberFormatException;
 
 public class AnalyseImages
 {
-    public static final String path1 = "/home/student/terentz/public_html/imsdb/";
-    public static final String path2 = "./imsdb/";
-
+    public static final String CONFIG_FILE = "config";
+    public static final int NUM_PARAMS = 13;  
+    public static String[] params = new String[NUM_PARAMS];
+    
     public static void main(String[] args)
     {
+        // Declare param's...
+        String exeMode  = null;
+        String imgList  = null;
+        String linkSrc  = null;
+        String linkDst  = null;
+        String dbCreate = null;
+        String dbInsert = null;
+        String dbHost   = null;
+        String dbName   = null;
+        String dbUser   = null;
+        String dbPwd    = null;
+        String dbTbl    = null;
+        String setScr   = null;
+        String resDir   = null;
+
         // check for correct number of execution arguments
         if(args.length!=1){
             Pr.ln("Insufficient argument list! Aborting...");
@@ -64,11 +81,10 @@ public class AnalyseImages
         }
 
         try{
-            Scanner confIn = new Scanner(new FileInputStream("config"));
-            String[] params = new String[7];
-            for(int i=0; i<7; ++i)
-                params[i] = paramValue(confIn.nextLine());
-            confIn.close();
+            Scanner fin = new Scanner(new FileInputStream(CONFIG_FILE));
+            for(int i=0; i<NUM_PARAMS; ++i)
+                params[i] = paramValue(fin.nextLine());
+            fin.close();
             
             // do the work!
             switch(mode){
@@ -148,21 +164,33 @@ Pr.ln("Reading " + imageListFile + "..");
     */
 
     private static void executeModeTwo(String[] params){
-        String tableName = "image";
-        String loadTableFile = params[3];
-        String imageListFile = params[1];
+       
+        // Declare param's...
+        String exeMode  = params[0];
+        String imgList  = params[1];
+        String linkSrc  = params[2];
+        String linkDst  = params[3];
+        String dbCreate = params[4];
+        String dbInsert = params[5];
+        String dbHost   = params[6];
+        String dbName   = params[7];
+        String dbUser   = params[8];
+        String dbPwd    = params[9];
+        String dbTbl    = params[10];
+        String setScr   = params[11];
+        String resDir   = params[12];
 
         long startTime = System.currentTimeMillis();
         long finishTimeInMS;
         int finishTimeInSecs;
         // write the fkn file!!
         try{
-            PrintWriter writeInsert = new PrintWriter(new FileOutputStream(loadTableFile));
-            Scanner imageListIn = new Scanner(new File(imageListFile));
-            Pr.ln("Reading " + imageListFile + "..");
-            String useStatement = "USE terentz;\n";
+            PrintWriter writeInsert = new PrintWriter(new FileOutputStream(dbInsert));
+            Scanner imageListIn = new Scanner(new File(imgList));
+            Pr.ln("Reading " + imgList + "..");
+            String useStatement = "USE " + params[7] + ";\n";
             writeInsert.print(useStatement);
-            String insertHeader = "INSERT INTO " + tableName + "\nVALUES\n(";
+            String insertHeader = "INSERT INTO " + dbTbl + "\nVALUES\n(";
             String insertTail = ");";
             // loop thru list items
             while(imageListIn.hasNextLine()){
@@ -170,12 +198,14 @@ Pr.ln("Reading " + imageListFile + "..");
                 try{
                     // set objects
                     String fileName = removeStar(imageListIn.nextLine().trim());
-                    Bitmap bm = new Bitmap(path1 + fileName);
+                    String path = linkDst + "/" + fileName;
+                    System.out.println("Creating bitmap object from path " + path);
+                    Bitmap bm = new Bitmap(path);
                     Image image = new Image(bm, fileName);
                     // create the insert statement
                     value = insertHeader + image.insertString(", ") + insertTail;
 //                    if(imageListIn.hasNextLine())
-//                        value = addBraces(value);
+//                        value = adlinkDst + fileNamedBraces(value);
 //                    else
 //                        value = addBracesEnd(value);
                     // write it and flush
@@ -190,13 +220,13 @@ Pr.ln("Reading " + imageListFile + "..");
             writeInsert.close();
         }
         catch(FileNotFoundException e){
-            Pr.ln("Cannot open/locate " + imageListFile + "! Aborting..");
+            Pr.ln("Cannot open/locate " + imgList + "! Aborting..");
             System.exit(0);
         }
-        catch(IOException e){
-            Pr.ln("Problem opening " + loadTableFile + "! Aborting...");
-            System.exit(0);
-        }
+//        catch(IOException e){
+//            Pr.ln("Problem opening " + loadTableFile + "! Aborting...");
+//            System.exit(0);
+//        }
         finishTimeInMS = System.currentTimeMillis() - startTime;
         finishTimeInSecs = (int)(finishTimeInMS/1000);
         Pr.ln("Analysis completed in " + finishTimeInSecs + " seconds.");

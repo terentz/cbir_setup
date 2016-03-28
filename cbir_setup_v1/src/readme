@@ -6,32 +6,39 @@
                 ***********************************
 
 
-1. Open the file "config".
+1. Create a new database
 
-    a) Assign either "1" or "2" to the variable "execute_mode"
-       (preferrably "2").
+2. Set parameters in 'config'
 
-    b) Assign to the variable "image_list_file" the name of the file
-       in which to store the list of names of bitmap files.
+    2.1 Assign either "1" or "2" to the variable "execute_mode"
+        (preferrably "2").
 
-    c) Assign to the variable "create_table_file" the name of the file
-       in which to store the "CREATE TABLE" command, ie the SQL/DDL.
+    2.2 
 
-    d) Assign to the variable "insert_values_file" the name of the file
-       in which to store the "INSERT INTO" command, ie the SQL/DML.
+    2.3 
 
-    e) Assign to the variable "MySQL_host" the name of your MySQL
-       server's hostname.
+    2.4 
 
-    f) Assign to the variable "MySQL_user" your MySQL username.
+    2.5 
 
-    g) Assign to the variable "MySQL_pwd" your MySQL password.
+    2.6 
+
+    2.7 
+
+    2.8 
+
+    2.9 
+
+    2.10 
+
+    2.11 
+
+    2.12
+
+3. Run 'init_setup.sh'
 
 
-2. Save and close the file "config".
-
-
-3. Run the following commands at the command line:
+3. 
 
     javac Setup.java
     java Setup

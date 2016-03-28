@@ -1,0 +1,14 @@
+execute_mode        = 2
+image_list_file     = # The file to save a list of bitmap filenames to
+link_src            = # The location of the bitmap files
+link_dst            = # A link to the bitmap file directory
+create_table_file   = # Data definition file
+insert_values_file  = # Data population file
+MySQL_host          = 
+MySQL_db            = 
+MySQL_user          = 
+MySQL_pwd           = 
+MySQL_table         = # The name of the table containing bitmap colour data
+setup_script        = setup.sh
+res_dir             = # Storage for other resources
+

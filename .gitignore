@@ -1,6 +1,13 @@
 cbir_setup_v1/nbproject/
 cbir_setup_v1/build.xml
 cbir_setup_v1/manifest.mf
+cbir_setup_v1/src/*.sql
+cbir_setup_v1/res/imageList.txt
+cbir_setup_v1/src/imageList.txt
+cbir_setup_v1/src/*.class
+cbir_setup_v1/src/config
+
 cbir_setup_v2/nbproject/
 cbir_setup_v2/build.xml
 cbir_setup_v2/manifest.mf
+
